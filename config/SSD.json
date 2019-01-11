@@ -1,0 +1,42 @@
+{
+  "Engine": "TensorRT",
+  "Category": "Detection",                       // Classify, Detection
+  "NetworkName": "SSD",               // Network name (name in data/ directory)
+  "Mode": "INT8",                               // INT8, FP16, FP32
+  "ModelBatchSize": 1,                         // Genereated model batchsize
+  "DeviceNo": 0,                                // GPU device number
+
+  "PrototxtPath": "ssd.prototxt",    // prototxt path
+  "ModelPath": "VGG_VOC0712_SSD_300x300_iter_120000.caffemodel",     // caffemodel path
+
+  "Width": 300,                                // input width
+  "Height": 300,                                 // input height
+  "Channel":3,                                  // input channel
+  "Scale": 1,                                   // scale
+  "Mean": [104, 117, 123],                      // mean value
+
+  "InputBlob": "data",                          // input blob
+  "OutputBlobs": [                              // output blobs
+    "detection_out",
+    "keep_count"
+  ],
+
+  "GenerateModel": 1,                           //0: read from cache            1:generate new model
+  "readCalibrationCache": 0,                    //0: read calibration cache     1:generate new cache
+  "Profile": 1,                                 //0: disable profiler           1:enable profiler
+
+  "MaxWorkspaceSize": 500000000,                //max workspace
+  
+  "CAL_BATCH_SIZE": 1,                         // Batch size  --- files loaded in batch
+  "FIRST_CAL_BATCH": 0,                         // First batch  --- skipped batch(es)
+  "NB_CAL_BATCHES": 20,                          //1000 Number of batches  --- total calibration batch(es)
+
+  "Verify": 1,                                  //0: disable test               1:test pictures from img list
+
+  "classNames": ["background", "aeroplane", "bicycle", "bird", "boat", "bottle", "bus", "car", "cat", "chair", "cow", "diningtable", "dog", "horse", "motorbike", "person", "pottedplant", "sheep", "sofa", "train", "tvmonitor"],
+  "confidenceThresholds": [1.0,0.7,0.55,0.55,0.55],
+  "GPUTransform": 1,
+
+  "testImgFile": "test.list",                   //test image list
+  "resultFile": "data.txt"
+}
